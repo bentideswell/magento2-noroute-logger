@@ -1,0 +1,14 @@
+{
+    "name": "fishpig/magento2-noroute-logger",
+    "description": "Log 404s",
+    "type": "magento2-module",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "FishPig\\NoRouteLogger\\": ""
+        }
+    },
+    "version": "0.9.0"
+}
