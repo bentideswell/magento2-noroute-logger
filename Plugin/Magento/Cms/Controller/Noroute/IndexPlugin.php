@@ -14,12 +14,17 @@ class IndexPlugin
     /**
      *
      */
+    private $requestLogger = null;
+
+    /**
+     *
+     */
     public function __construct(
         \FishPig\NoRouteLogger\Model\RequestLogger $requestLogger
     ) {
         $this->requestLogger = $requestLogger;
     }
-    
+
     /**
      *
      */
@@ -28,7 +33,7 @@ class IndexPlugin
         if ($resultPage instanceof \Magento\Framework\View\Result\Page) {
             $this->requestLogger->log404();
         }
-        
+
         return $resultPage;
     }
 }

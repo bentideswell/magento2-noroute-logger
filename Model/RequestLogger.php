@@ -12,7 +12,12 @@ class RequestLogger
      * @const string
      */
     const DATA_ITEM_SPACER = '  ';
-    
+
+    /**
+     *
+     */
+    private $request = null;
+
     /**
      *
      */
@@ -21,12 +26,12 @@ class RequestLogger
     ) {
         $this->request = $request;
     }
-    
+
     /**
      *
      */
     public function log404()
-    {        
+    {
         return $this->log('404');
     }
 
@@ -41,12 +46,12 @@ class RequestLogger
         try {
             if (!is_dir($logPath)) {
                 if (!is_writable(dirname($logPath))) {
-                    throw new \Exception('Unable to create log directory at ' . $logPath); 
+                    throw new \Exception('Unable to create log directory at ' . $logPath);
                 }
-                
+
                 mkdir($logPath, true, 0755);
             }
-            
+
             file_put_contents(
                 $logPath . '/' . $logFile,
                 $this->getCurrentRequestData() . PHP_EOL,
@@ -55,10 +60,10 @@ class RequestLogger
         } catch (\Exception $e) {
 
         }
-        
+
         return $this;
     }
-    
+
     /**
      *
      */
@@ -69,7 +74,7 @@ class RequestLogger
             str_pad($this->request->getClientIp(), 15, ' '),
             str_pad($this->request->getMethod(), 4, ' ', STR_PAD_LEFT) . ' ' . $this->request->getRequestUri(),
         ];
-        
+
         return implode(self::DATA_ITEM_SPACER, $data);
     }
 }
