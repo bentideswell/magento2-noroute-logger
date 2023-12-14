@@ -32,7 +32,7 @@ class RequestLogger
      */
     public function log404()
     {
-        return $this->log('404');
+        return $this->log(404);
     }
 
     /**
@@ -45,14 +45,14 @@ class RequestLogger
 
         try {
             if (!is_dir($logPath)) {
-                if (!is_writable(dirname($logPath))) {
-                    throw new \Exception('Unable to create log directory at ' . $logPath);
-                }
+                @mkdir($logPath, 0755, true);
 
-                mkdir($logPath, true, 0755);
+                if (!is_dir($logPath)) {
+                    return;
+                }
             }
 
-            file_put_contents(
+            @file_put_contents(
                 $logPath . '/' . $logFile,
                 $this->getCurrentRequestData() . PHP_EOL,
                 FILE_APPEND
