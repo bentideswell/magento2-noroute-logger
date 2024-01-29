@@ -1,6 +1,6 @@
 {
     "name": "fishpig/magento2-noroute-logger",
-    "description": "Log 404s",
+    "description": "Keeps basic log of 404 requests in var/log/noroute-404.log",
     "type": "magento2-module",
     "autoload": {
         "files": [
@@ -10,5 +10,5 @@
             "FishPig\\NoRouteLogger\\": ""
         }
     },
-    "version": "1.0.2"
+    "version": "1.0.3"
 }

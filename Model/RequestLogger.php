@@ -72,9 +72,17 @@ class RequestLogger
         $data = [
             date('Y/m/d H:i:s'),
             str_pad($this->request->getClientIp(), 15, ' '),
-            str_pad($this->request->getMethod(), 4, ' ', STR_PAD_LEFT) . ' ' . $this->request->getRequestUri(),
+            str_pad($this->request->getMethod(), 4, ' ', STR_PAD_LEFT) . ' ' . $this->request->getUriString()
         ];
 
-        return implode(self::DATA_ITEM_SPACER, $data);
+        foreach ([
+            'Ref' => $this->request->getServerValue('HTTP_REFERER'),
+            'Agent' => $this->request->getServerValue('HTTP_USER_AGENT')] as $key => $value) {
+            if ($value) {
+                $data[] = $key . '=' . $value;
+            }
+        }
+
+        return implode(self::DATA_ITEM_SPACER, array_filter($data));
     }
 }
